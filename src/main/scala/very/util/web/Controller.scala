@@ -8,6 +8,9 @@ import very.util.web.json.ZIOJsonSupport
 import very.util.web.validate.ValidationExtra
 import zio.NonEmptyChunk
 import zio.prelude.Validation
+
+
+// This should rewrite for your company needs of the format of response
 class Controller //(using val jsonFormats: Formats)
   extends ScalatraServlet
   with ZIOJsonSupport
