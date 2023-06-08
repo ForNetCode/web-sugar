@@ -46,7 +46,7 @@ object Dependencies {
       // "org.json4s"   %% "json4s-jackson" % "4.1.0-M1",
       // "org.json4s"   %% "json4s-ext" % "4.1.0-M1",
       "dev.zio" %% "zio-json" % "0.4.2",
-      "org.eclipse.jetty" % "jetty-webapp" % "11.0.14" % "container;compile",
+      "org.eclipse.jetty" % "jetty-webapp" % "11.0.14" % "compile",
     )
   }
 
