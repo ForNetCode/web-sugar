@@ -4,9 +4,7 @@ Syntactic sugar of Scalatra for web development with Scala 3. The project now is
 ## Target of this project
 This project would collect all things we used in the development of web server with Scala 3. The libraries of this project would not treat `Performance` or `Cooperation` as first thing, but easily use and write less code. 
 
-So instead of using this project as well promised web framework, just treat it as a syntactic sugar wrapper of Scalatra Web Framework. You could copy the codebase everywhere or import this project using `git submodule` to your project (This is how we used this project).
-
-With heavy usage of `given` and `extension`, debug of this project may not be an easy job for newbie of Scala.
+So instead of using this project as well promised web framework, just treat it as a syntactic sugar wrapper of Scalatra Web Framework. You could copy the codebase everywhere or import this project using `git submodule` to your project (This is how we used this project). 
 
 **We recommend you fork this project, and change it for your needs.**
 
@@ -31,7 +29,7 @@ For SSO
 #### zio-preload
 For validation parameters
 ## Documentation
-[fornet backend server](https://github.com/ForNetCode/fornet/tree/main/backend) would be the best tutorial of how to use this project. Of course, we provide [startup template【WIP】](https://github.com/ForNetCode/web-sugar-startup) for this project.
+[fornet backend server](https://github.com/ForNetCode/fornet/tree/main/backend) would be the best tutorial of how to use this project. Of course, we provide [startup template](https://github.com/ForNetCode/web-sugar-startup) for this project.
 
 ## What's more
 Sometimes we would rewrite the codebase if it could not support our projects, just like switch Scalatra to Playframework for Async. So we could not promise this project would be long term support.
