@@ -13,16 +13,16 @@ object Dependencies {
 
   lazy val logLib = Seq(
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-    "ch.qos.logback" % "logback-classic" % "1.4.6",
+    "ch.qos.logback" % "logback-classic" % "1.4.7",
   )
 
   lazy val persistence = Seq(
-    "org.flywaydb" % "flyway-core" % "9.16.0",
+    "org.flywaydb" % "flyway-core" % "9.19.4",
     // "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
     // "org.scalikejdbc" %% "scalikejdbc-config"  % "4.0.0",
     "io.getquill" %% "quill-jdbc" % "4.6.0.1",
     // "io.getquill" %% "quill-codegen-jdbc" % "4.4.0",
-    "org.postgresql" % "postgresql" % "42.5.4",
+    "org.postgresql" % "postgresql" % "42.6.0",
     // "joda-time" % "joda-time" % "2.11.1",
     // "org.scalikejdbc" %% "scalikejdbc-joda-time" % "4.0.0",
   )
@@ -37,7 +37,7 @@ object Dependencies {
   }
 
   lazy val webServer = {
-    val scalatraVersion = "3.0.0-M2"
+    val scalatraVersion = "3.0.0-M4-jakarta"
     Seq(
       "org.scalatra" %% "scalatra" % scalatraVersion,
       "org.scalatra" %% "scalatra-swagger" % scalatraVersion,
@@ -45,8 +45,8 @@ object Dependencies {
       // "org.scalatra" %% "scalatra-auth" % scalatraVersion,
       // "org.json4s"   %% "json4s-jackson" % "4.1.0-M1",
       // "org.json4s"   %% "json4s-ext" % "4.1.0-M1",
-      "dev.zio" %% "zio-json" % "0.4.2",
-      "org.eclipse.jetty" % "jetty-webapp" % "11.0.14" % "compile",
+      "dev.zio" %% "zio-json" % "0.5.0",
+      "org.eclipse.jetty" % "jetty-webapp" % "11.0.15" % "compile",
     )
   }
 
@@ -55,7 +55,7 @@ object Dependencies {
   )
 
   lazy val keycloakLib = Seq(
-    "org.keycloak" % "keycloak-core" % "20.0.5",
+    "org.keycloak" % "keycloak-core" % "21.0.1",
     // "org.keycloak" % "keycloak-adapter-core" % keycloakVersion,
     // "org.keycloak" % "keycloak-authz-client" % keycloakVersion,
 

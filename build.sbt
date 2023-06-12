@@ -1,4 +1,4 @@
-val scala3Version = "3.2.1"
+val scala3Version = "3.3.0"
 
 
 // zio-json default value needs this
@@ -16,7 +16,7 @@ lazy val webSugar = project
 
     libraryDependencies ++= grpc ++ persistence ++ logLib ++ webServer ++ configLib ++
       keycloakLib ++ httpClient ++ Seq(
-      "dev.zio" %% "zio-prelude" % "1.0.0-RC16", // for validate
+      "dev.zio" %% "zio-prelude" % "1.0.0-RC19", // for validate
       "com.github.seancfoley" % "ipaddress" % "5.4.0", // for ip parse
       "org.hashids" % "hashids" % "1.0.3", // hashids
       "org.scalameta" %% "munit" % "0.7.29" % Test
