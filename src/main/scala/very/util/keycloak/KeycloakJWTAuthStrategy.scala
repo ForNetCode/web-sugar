@@ -9,17 +9,15 @@ import very.util.web.auth.AuthStrategy
 
 import scala.util.{ Success, Failure }
 
-class KeycloakJWTAuthStrategy(jwkTokenVerifier: JWKTokenVerifier, adminRole: Option[String], clientRole:Option[String])
-  extends AuthStrategy[String] {
-  def logger: Logger = com.typesafe.scalalogging.Logger(getClass.getName)
-
+class KeycloakJWTAuthStrategy(jwkTokenVerifier: JWKTokenVerifier, adminRole: Option[String], clientRole: Option[String])
+  extends AuthStrategy[String] with LazyLogging {
   // JWT
   def name: String = KeycloakJWTAuthStrategy.name
 
   def adminAuth(token: String): Option[String] = {
     jwkTokenVerifier.verify(token) match {
       case Success(accessToken) =>
-        if (adminRole.isEmpty || accessToken.getRealmAccess.getRoles.contains(adminRole.get)) {
+        if (adminRole.fold(true)(role => accessToken.getRealmAccess.getRoles.contains(role))) {
           Some(accessToken.getSubject)
         } else {
           logger.info(
@@ -33,10 +31,10 @@ class KeycloakJWTAuthStrategy(jwkTokenVerifier: JWKTokenVerifier, adminRole: Opt
     }
   }
 
-  def clientAuth(token:String):Option[String] = {
+  def clientAuth(token: String): Option[String] = {
     jwkTokenVerifier.verify(token) match {
       case Success(accessToken) =>
-        if (clientRole.isEmpty||accessToken.getRealmAccess.getRoles.contains(clientRole.get)) {
+        if (clientRole.fold(true)(role => accessToken.getRealmAccess.getRoles.contains(role))) {
           Some(accessToken.getSubject)
         } else {
           logger.info(
@@ -53,5 +51,5 @@ class KeycloakJWTAuthStrategy(jwkTokenVerifier: JWKTokenVerifier, adminRole: Opt
 }
 
 object KeycloakJWTAuthStrategy {
-  val name:String = "Bearer"
+  val name: String = "Bearer"
 }
