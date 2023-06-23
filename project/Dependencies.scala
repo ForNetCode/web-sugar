@@ -55,7 +55,7 @@ object Dependencies {
   )
 
   lazy val keycloakLib = Seq(
-    "org.keycloak" % "keycloak-core" % "21.0.1",
+    "org.keycloak" % "keycloak-core" % "20.0.5",//21.0.1: java.lang.NoClassDefFoundError: org/jboss/logging/Logger JWKSUtils.java:39
     // "org.keycloak" % "keycloak-adapter-core" % keycloakVersion,
     // "org.keycloak" % "keycloak-authz-client" % keycloakVersion,
 
