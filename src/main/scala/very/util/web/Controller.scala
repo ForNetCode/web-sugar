@@ -9,9 +9,6 @@ import very.util.web.json.ZIOJsonSupport
 import very.util.web.validate.ValidationExtra
 import zio.NonEmptyChunk
 import zio.prelude.Validation
-
-
-// This should rewrite for your company needs of the format of response
 class Controller //(using val jsonFormats: Formats)
   extends ScalatraServlet
   with ZIOJsonSupport
@@ -43,12 +40,14 @@ class Controller //(using val jsonFormats: Formats)
       super.renderPipeline(info)
   }: RenderPipeline) orElse super.renderPipeline
 
+  /*
   def created(id: Long): ActionResult = {
     contentType = formats("json")
     Created(s"""{"id":$id}""")
   }
+  */
   def created(id: very.util.security.ID[_]): ActionResult = {
     contentType = formats("json")
-    Created(s"""{"id":${id.secretId}}""")
+    Created(s"""{"id":"${id.secretId}"}""")
   }
 }
