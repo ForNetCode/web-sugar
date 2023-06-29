@@ -3,11 +3,11 @@ package very.util.web.json
 import jakarta.servlet.http.HttpServletRequest
 import org.hashids.Hashids
 import org.scalatra.*
-import very.util.security.IntID
+import very.util.security.{IntID, TokenID}
 import zio.json.*
 import zio.json.ast.Json
 
-import scala.util.{ Failure, Success, Try }
+import scala.util.{Failure, Success, Try}
 
 trait ZIOJsonSupport extends ApiFormats {
 
@@ -99,3 +99,11 @@ given intIDDecoder(using hashId: Hashids): JsonDecoder[IntID] = JsonDecoder[Stri
   }
 }
 given intIDEncoder: JsonEncoder[IntID] = JsonEncoder.string.contramap(_.secretId)
+
+given tokenIDDecoder(using hashId: Hashids): JsonDecoder[TokenID] = JsonDecoder[String].mapOrFail( v=>
+  Try(TokenID(v)) match {
+    case Success(v) => Right(v)
+    case Failure(_) => Left("InValid ID")
+  }
+)
+given tokenIDEncoder: JsonEncoder[TokenID] = JsonEncoder.string.contramap(_.secretId)
