@@ -21,7 +21,7 @@ object IntID {
 object ID {
   extension (secretId: String)(using hashId: Hashids) {
     def toIntID: IntID = IntID(secretId)
-    def toTokenId: TokenID = TokenID(secretId)
+    def toTokenID: TokenID = TokenID(secretId)
   }
 }
 
