@@ -3,15 +3,17 @@ package very.util.web.json
 import jakarta.servlet.http.HttpServletRequest
 import org.hashids.Hashids
 import org.scalatra.*
-import very.util.security.{IntID, TokenID}
+import very.util.security.{ IntID, TokenID }
 import zio.json.*
 import zio.json.ast.Json
 
-import scala.util.{Failure, Success, Try}
+import scala.util.{ Failure, Success, Try }
 
 trait ZIOJsonSupport extends ApiFormats {
 
-  private def parsedBody[T](action: T => Any)(implicit request: HttpServletRequest, decoder: JsonDecoder[T]): Any = {
+  protected def parsedBody[T](
+    action: T => Any
+  )(implicit request: HttpServletRequest, decoder: JsonDecoder[T]): Any = {
     request.body.fromJson[T] match {
       case Right(v) => action(v)
       case Left(msg) =>
@@ -80,30 +82,41 @@ trait ZIOJsonSupport extends ApiFormats {
 trait JResponse[T] {
   def toJson: String
 }
-case class DefaultJResponse[T](body: T)(using JsonEncoder[T]) extends JResponse[T] {
+case class DefaultJResponse[T](body: T)(using JsonEncoder[T])
+  extends JResponse[T] {
   def toJson: String = body.toJson
 }
-case class PageJResponse[T](total: Long, body: List[T])(using JsonEncoder[T]) extends JResponse[T] {
+case class PageJResponse[T](total: Long, body: List[T])(using JsonEncoder[T])
+  extends JResponse[T] {
   def toJson: String =
-    Json.Obj("total" -> Json.Num(total), "list" -> body.toJsonAST.getOrElse(Json.Arr())).toJson
+    Json
+      .Obj(
+        "total" -> Json.Num(total),
+        "list" -> body.toJsonAST.getOrElse(Json.Arr())
+      )
+      .toJson
 
 }
-case class JsonResponse[T](body: T)(using JsonEncoder[T]) {
+case class JsonResponse[T](body: T)(using JsonEncoder[T]) extends JResponse[T] {
   def toJson: String = body.toJson
 }
 
-given intIDDecoder(using hashId: Hashids): JsonDecoder[IntID] = JsonDecoder[String].mapOrFail { v =>
-  Try(IntID.apply(v)) match {
-    case Success(v) => Right(v)
-    case Failure(_) => Left("Invalid ID")
+given intIDDecoder(using hashId: Hashids): JsonDecoder[IntID] =
+  JsonDecoder[String].mapOrFail { v =>
+    Try(IntID.apply(v)) match {
+      case Success(v) => Right(v)
+      case Failure(_) => Left("Invalid ID")
+    }
   }
-}
-given intIDEncoder: JsonEncoder[IntID] = JsonEncoder.string.contramap(_.secretId)
+given intIDEncoder: JsonEncoder[IntID] =
+  JsonEncoder.string.contramap(_.secretId)
 
-given tokenIDDecoder(using hashId: Hashids): JsonDecoder[TokenID] = JsonDecoder[String].mapOrFail( v=>
-  Try(TokenID(v)) match {
-    case Success(v) => Right(v)
-    case Failure(_) => Left("InValid ID")
-  }
-)
-given tokenIDEncoder: JsonEncoder[TokenID] = JsonEncoder.string.contramap(_.secretId)
+given tokenIDDecoder(using hashId: Hashids): JsonDecoder[TokenID] =
+  JsonDecoder[String].mapOrFail(v =>
+    Try(TokenID(v)) match {
+      case Success(v) => Right(v)
+      case Failure(_) => Left("InValid ID")
+    }
+  )
+given tokenIDEncoder: JsonEncoder[TokenID] =
+  JsonEncoder.string.contramap(_.secretId)

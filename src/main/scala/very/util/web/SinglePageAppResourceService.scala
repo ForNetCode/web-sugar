@@ -11,7 +11,11 @@ class SinglePageAppResourceService extends ResourceService {
     if (request.getRequestURI.contains(".") && request.getMethod != "GET") {
       super.notFound(request, response)
     } else {
-      response.sendRedirect("/")
+      if(request.getRequestURI == "/") {
+        super.notFound(request, response)
+      }else {
+        response.sendRedirect("/")
+      }
     }
   }
 }
