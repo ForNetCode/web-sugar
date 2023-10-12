@@ -20,7 +20,7 @@ object Dependencies {
     "org.flywaydb" % "flyway-core" % "9.19.4",
     // "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
     // "org.scalikejdbc" %% "scalikejdbc-config"  % "4.0.0",
-    "io.getquill" %% "quill-jdbc" % "4.6.0.1",
+    "io.getquill" %% "quill-jdbc" % "4.8.0",
     // "io.getquill" %% "quill-codegen-jdbc" % "4.4.0",
     "org.postgresql" % "postgresql" % "42.6.0",
     // "joda-time" % "joda-time" % "2.11.1",
@@ -28,7 +28,7 @@ object Dependencies {
   )
 
   lazy val httpClient = {
-    val version = "3.8.15"
+    val version = "3.9.0"
     Seq(
       "com.softwaremill.sttp.client3" %% "core" % version,
       "com.softwaremill.sttp.client3" %% "zio-json" % version,
@@ -37,16 +37,16 @@ object Dependencies {
   }
 
   lazy val webServer = {
-    val scalatraVersion = "3.0.0-M4-jakarta"
+    val scalatraVersion = "3.0.0"
     Seq(
-      "org.scalatra" %% "scalatra" % scalatraVersion,
-      "org.scalatra" %% "scalatra-swagger" % scalatraVersion,
-      "org.scalatra" %% "scalatra-json" % scalatraVersion,
-      // "org.scalatra" %% "scalatra-auth" % scalatraVersion,
+      "org.scalatra" %% "scalatra-jakarta" % scalatraVersion,
+      // "org.scalatra" %% "scalatra-swagger" % scalatraVersion,
+      "org.scalatra" %% "scalatra-json-jakarta" %  scalatraVersion,
+      "org.scalatra" %% "scalatra-auth-jakarta" % scalatraVersion,
       // "org.json4s"   %% "json4s-jackson" % "4.1.0-M1",
       // "org.json4s"   %% "json4s-ext" % "4.1.0-M1",
-      "dev.zio" %% "zio-json" % "0.5.0",
-      "org.eclipse.jetty" % "jetty-webapp" % "11.0.15" % "compile",
+      "dev.zio" %% "zio-json" % "0.6.2",
+      "org.eclipse.jetty" % "jetty-webapp" % "11.0.17" % "compile",
     )
   }
 
@@ -55,7 +55,7 @@ object Dependencies {
   )
 
   lazy val keycloakLib = Seq(
-    "org.keycloak" % "keycloak-core" % "20.0.5",//21.0.1: java.lang.NoClassDefFoundError: org/jboss/logging/Logger JWKSUtils.java:39
+    "org.keycloak" % "keycloak-core" % "20.0.5", // 21.0.1: java.lang.NoClassDefFoundError: org/jboss/logging/Logger JWKSUtils.java:39
     // "org.keycloak" % "keycloak-adapter-core" % keycloakVersion,
     // "org.keycloak" % "keycloak-authz-client" % keycloakVersion,
 

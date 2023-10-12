@@ -3,7 +3,7 @@ package very.util.web
 import com.typesafe.scalalogging.LazyLogging
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.*
-//import org.json4s.Formats
+
 import org.scalatra.i18n.I18nSupport
 import very.util.web.json.ZIOJsonSupport
 import very.util.web.validate.ValidationExtra
@@ -27,7 +27,7 @@ class Controller //(using val jsonFormats: Formats)
   }
 
   errorHandler = {
-    case _: org.json4s.MappingException | _: java.lang.NumberFormatException | _: java.lang.AssertionError =>
+    case  _: java.lang.NumberFormatException | _: java.lang.AssertionError =>
       badResponse(messages("error.parameter_error"))
     case t =>
       logger.error("errorHandler", t)
