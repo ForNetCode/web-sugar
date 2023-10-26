@@ -18,13 +18,9 @@ object Dependencies {
 
   lazy val persistence = Seq(
     "org.flywaydb" % "flyway-core" % "9.19.4",
-    // "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
-    // "org.scalikejdbc" %% "scalikejdbc-config"  % "4.0.0",
     "io.getquill" %% "quill-jdbc" % "4.8.0",
-    // "io.getquill" %% "quill-codegen-jdbc" % "4.4.0",
-    "org.postgresql" % "postgresql" % "42.6.0",
-    // "joda-time" % "joda-time" % "2.11.1",
-    // "org.scalikejdbc" %% "scalikejdbc-joda-time" % "4.0.0",
+    // "org.postgresql" % "postgresql" % "42.6.0",
+    // "mysql" % "mysql-connector-java" % "8.0.17",
   )
 
   lazy val httpClient = {
@@ -41,7 +37,7 @@ object Dependencies {
     Seq(
       "org.scalatra" %% "scalatra-jakarta" % scalatraVersion,
       // "org.scalatra" %% "scalatra-swagger" % scalatraVersion,
-      "org.scalatra" %% "scalatra-json-jakarta" %  scalatraVersion,
+      "org.scalatra" %% "scalatra-json-jakarta" % scalatraVersion,
       "org.scalatra" %% "scalatra-auth-jakarta" % scalatraVersion,
       // "org.json4s"   %% "json4s-jackson" % "4.1.0-M1",
       // "org.json4s"   %% "json4s-ext" % "4.1.0-M1",
