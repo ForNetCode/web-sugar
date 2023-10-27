@@ -19,8 +19,8 @@ object Dependencies {
   lazy val persistence = Seq(
     "org.flywaydb" % "flyway-core" % "9.19.4",
     "io.getquill" %% "quill-jdbc" % "4.8.0",
-    // "org.postgresql" % "postgresql" % "42.6.0",
-    // "mysql" % "mysql-connector-java" % "8.0.17",
+    "org.postgresql" % "postgresql" % "42.6.0" % "compile",
+    "mysql" % "mysql-connector-java" % "8.0.17" % "compile",
   )
 
   lazy val httpClient = {
