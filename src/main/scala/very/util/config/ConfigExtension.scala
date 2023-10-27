@@ -1,15 +1,17 @@
 package very.util.config
 
-import com.typesafe.config.{Config, ConfigList, ConfigMemorySize, ConfigObject}
+import com.typesafe.config.{Config, ConfigFactory, ConfigList, ConfigMemorySize, ConfigObject}
 
 import java.net.{URI, URL}
 import java.time.Period
 import java.time.temporal.TemporalAmount
 import scala.concurrent.duration.{Duration, FiniteDuration}
 
-//import scala.collection.JavaConverters._
 import scala.jdk.CollectionConverters._
 
+trait WithConfig {
+  given config: Config = ConfigFactory.load()
+}
 trait ConfigLoader[A] {
   self =>
   def load(config: Config, path: String = ""): A
