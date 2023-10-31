@@ -1,7 +1,6 @@
 package very.util.web
 
 import com.typesafe.scalalogging.LazyLogging
-import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.*
 
 import org.scalatra.i18n.I18nSupport
@@ -9,7 +8,7 @@ import very.util.web.json.ZIOJsonSupport
 import very.util.web.validate.ValidationExtra
 import zio.NonEmptyChunk
 import zio.prelude.Validation
-class Controller //(using val jsonFormats: Formats)
+class Controller
   extends ScalatraServlet
   with ZIOJsonSupport
   with I18nSupport
