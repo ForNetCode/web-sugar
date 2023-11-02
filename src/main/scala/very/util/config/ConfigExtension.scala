@@ -1,17 +1,19 @@
 package very.util.config
 
-import com.typesafe.config.{Config, ConfigFactory, ConfigList, ConfigMemorySize, ConfigObject}
+import com.typesafe.config.{ Config, ConfigFactory, ConfigList, ConfigMemorySize, ConfigObject }
 
-import java.net.{URI, URL}
+import java.net.{ URI, URL }
 import java.time.Period
 import java.time.temporal.TemporalAmount
-import scala.concurrent.duration.{Duration, FiniteDuration}
+import scala.concurrent.duration.{ Duration, FiniteDuration }
 
 import scala.jdk.CollectionConverters._
 
 trait WithConfig {
-  given config: Config = ConfigFactory.load()
+  val config: Config = ConfigFactory.load()
+  given Config = config
 }
+
 trait ConfigLoader[A] {
   self =>
   def load(config: Config, path: String = ""): A
@@ -38,11 +40,10 @@ object ConfigLoader {
   implicit val seqFiniteDurationLoader: ConfigLoader[Seq[FiniteDuration]] =
     ConfigLoader(_.getDurationList).map(_.asScala.map(javaDurationToScala).toSeq)
 
-  implicit val durationLoader: ConfigLoader[Duration] = ConfigLoader { config =>
-    path =>
-      if (config.getIsNull(path)) Duration.Inf
-      else if (config.getString(path) == "infinite") Duration.Inf
-      else finiteDurationLoader.load(config, path)
+  implicit val durationLoader: ConfigLoader[Duration] = ConfigLoader { config => path =>
+    if (config.getIsNull(path)) Duration.Inf
+    else if (config.getString(path) == "infinite") Duration.Inf
+    else finiteDurationLoader.load(config, path)
   }
 
   // Note: this does not support null values but it added for convenience
@@ -73,8 +74,8 @@ object ConfigLoader {
   implicit val configObjectLoader: ConfigLoader[ConfigObject] = ConfigLoader(_.getObject)
   implicit val seqConfigLoader: ConfigLoader[Seq[Config]] = ConfigLoader(_.getConfigList).map(_.asScala.toSeq)
 
-  //implicit val configurationLoader: ConfigLoader[Configuration] = configLoader.map(Configuration(_))
-  //implicit val seqConfigurationLoader: ConfigLoader[Seq[Configuration]] = seqConfigLoader.map(_.map(Configuration(_)))
+  // implicit val configurationLoader: ConfigLoader[Configuration] = configLoader.map(Configuration(_))
+  // implicit val seqConfigurationLoader: ConfigLoader[Seq[Configuration]] = seqConfigLoader.map(_.map(Configuration(_)))
 
   implicit val urlLoader: ConfigLoader[URL] = ConfigLoader(_.getString).map(new URL(_))
   implicit val uriLoader: ConfigLoader[URI] = ConfigLoader(_.getString).map(new URI(_))
@@ -92,4 +93,3 @@ extension (underlying: Config) {
     loader.load(underlying, path)
   }
 }
-
