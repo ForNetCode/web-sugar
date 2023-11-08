@@ -2,8 +2,10 @@ package very.util.web
 
 import com.typesafe.scalalogging.Logger
 
-import scala.util.{Failure, Try}
+import scala.util.{ Failure, Try }
 trait LogSupport {
+
+  @transient
   protected lazy val logger: Logger =
     com.typesafe.scalalogging.Logger(getClass.getName.stripSuffix("$"))
 

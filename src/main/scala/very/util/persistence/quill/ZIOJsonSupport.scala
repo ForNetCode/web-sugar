@@ -29,7 +29,6 @@ trait ZIOJsonSupport {
         jsonObject.setType("jsonb")
         jsonObject.setValue(value.toJson)
         row.setObject(index, jsonObject)
-
       }
     )
   }
