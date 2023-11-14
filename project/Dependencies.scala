@@ -56,4 +56,10 @@ object Dependencies {
     // "org.keycloak" % "keycloak-authz-client" % keycloakVersion,
 
   )
+  val pekkoVersion = "1.0.1"
+
+  lazy val pekkoLib = Seq(
+    "org.apache.pekko" %% "pekko-actor-typed" % pekkoVersion,
+    "org.apache.pekko" %% "pekko-remote" % pekkoVersion,
+  )
 }

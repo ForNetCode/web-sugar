@@ -15,7 +15,7 @@ lazy val webSugar = project
     scalaVersion := scala3Version,
 
     libraryDependencies ++= grpc ++ persistence ++ logLib ++ webServer ++ configLib ++
-      keycloakLib ++ httpClient ++ Seq(
+      keycloakLib ++ httpClient ++ pekkoLib ++Seq(
       "dev.zio" %% "zio-prelude" % "1.0.0-RC19", // for validate
       "com.github.seancfoley" % "ipaddress" % "5.4.0", // for ip parse
       "org.hashids" % "hashids" % "1.0.3", // hashids
