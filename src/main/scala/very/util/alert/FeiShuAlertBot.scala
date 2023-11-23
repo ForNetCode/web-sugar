@@ -8,7 +8,6 @@ import very.util.config.WithConfig
 import zio.json.*
 import zio.json.ast.{ Json, JsonCursor }
 
-
 trait WithAlert extends WithConfig {
   import very.util.config.getOptional
   object feiShuAlertBot
@@ -22,7 +21,7 @@ class FeiShuAlertBot(url: String, secret: Option[String] = None) extends Alert {
     Slf4jLoggingBackend(HttpClientSyncBackend())
 
   def send(text: String): Boolean = {
-    val resp = basicRequest
+    basicRequest
       .post(uri"$url")
       .body(
         Json.Obj(
@@ -31,7 +30,6 @@ class FeiShuAlertBot(url: String, secret: Option[String] = None) extends Alert {
         )
       )
       .send(client)
-    val body = resp.body.toJsonAST
-    body.exists(j => j.get(JsonCursor.field("code").isNumber).exists(_.value == 0))
+      .is200
   }
 }
