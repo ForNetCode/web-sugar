@@ -8,7 +8,6 @@ object Dependencies {
     // (optional) If you need scalapb/scalapb.proto or anything from
     // google/protobuf/*.proto
     "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf",
-    // "io.jsonwebtoken" % "jjwt" % "0.9.1",
   )
 
   lazy val logLib = Seq(
@@ -28,32 +27,36 @@ object Dependencies {
     Seq(
       "com.softwaremill.sttp.client3" %% "core" % version,
       "com.softwaremill.sttp.client3" %% "zio-json" % version,
+      "com.softwaremill.sttp.client3" %% "circe" % version,
       "com.softwaremill.sttp.client3" %% "slf4j-backend" % version,
     )
   }
 
-  lazy val webServer = {
-    val scalatraVersion = "3.0.0"
+  lazy val tapir = {
+    val version = "1.9.1"
+    val circeVersion = "0.14.1"
     Seq(
-      "org.scalatra" %% "scalatra-jakarta" % scalatraVersion,
-      // "org.scalatra" %% "scalatra-swagger" % scalatraVersion,
-      "org.scalatra" %% "scalatra-json-jakarta" % scalatraVersion,
-      "org.scalatra" %% "scalatra-auth-jakarta" % scalatraVersion,
-      // "org.json4s"   %% "json4s-jackson" % "4.1.0-M1",
-      // "org.json4s"   %% "json4s-ext" % "4.1.0-M1",
-      "dev.zio" %% "zio-json" % "0.6.2",
-      "org.eclipse.jetty" % "jetty-webapp" % "11.0.17" % "compile",
+      "io.circe" %% "circe-core",
+      "io.circe" %% "circe-generic",
+      "io.circe" %% "circe-parser"
+    ).map(_ % circeVersion) ++
+      Seq(
+        "com.softwaremill.sttp.tapir" %% "tapir-netty-server" % version,
+        "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % version,
+        // docs
+        "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % version,
+        // static file
+        "com.softwaremill.sttp.tapir" %% "tapir-files" % version,
+        // monitor, you could use opentelemetry java agent to solve metrics collector.
+        // "com.softwaremill.sttp.tapir" %% "tapir-opentelemetry-metrics" % version,
+      )
+  }
+
+  lazy val configLib = {
+    Seq(
+      // "com.typesafe" % "config" % "1.4.2",
+      "io.circe" %% "circe-config" % "0.10.1"
     )
   }
 
-  lazy val configLib = Seq(
-    "com.typesafe" % "config" % "1.4.2"
-  )
-
-  lazy val keycloakLib = Seq(
-    "org.keycloak" % "keycloak-core" % "20.0.5", // 21.0.1: java.lang.NoClassDefFoundError: org/jboss/logging/Logger JWKSUtils.java:39
-    // "org.keycloak" % "keycloak-adapter-core" % keycloakVersion,
-    // "org.keycloak" % "keycloak-authz-client" % keycloakVersion,
-
-  )
 }
