@@ -33,7 +33,7 @@ object Dependencies {
   }
 
   lazy val tapir = {
-    val version = "1.9.1"
+    val version = "1.9.2"
     val circeVersion = "0.14.1"
     Seq(
       "io.circe" %% "circe-core",
@@ -47,6 +47,7 @@ object Dependencies {
         "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % version,
         // static file
         "com.softwaremill.sttp.tapir" %% "tapir-files" % version,
+        "com.softwaremill.sttp.tapir" %% "tapir-enumeratum" % version,
         // monitor, you could use opentelemetry java agent to solve metrics collector.
         // "com.softwaremill.sttp.tapir" %% "tapir-opentelemetry-metrics" % version,
       )
@@ -56,6 +57,15 @@ object Dependencies {
     Seq(
       // "com.typesafe" % "config" % "1.4.2",
       "io.circe" %% "circe-config" % "0.10.1"
+    )
+  }
+
+  lazy val enumExtraLib = {
+    val version = "1.7.3"
+    Seq(
+      "com.beachape" %% "enumeratum" % version,
+      "com.beachape" %% "enumeratum-quill" % version,
+      "com.beachape" %% "enumeratum-circe" % version,
     )
   }
 

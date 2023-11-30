@@ -15,7 +15,7 @@ lazy val webSugar = project
     scalaVersion := scala3Version,
 
     libraryDependencies ++= grpc ++ persistence ++ logLib ++ configLib ++
-      httpClient ++ tapir ++ Seq(
+      httpClient ++ tapir ++ enumExtraLib ++ Seq(
       "org.hashids" % "hashids" % "1.0.3", // hashids
       "org.scalameta" %% "munit" % "0.7.29" % Test
     )
