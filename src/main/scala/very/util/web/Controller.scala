@@ -9,6 +9,8 @@ sealed trait ErrorInfo
 case class NotFound(msg: String) extends ErrorInfo
 case class BadRequest(msg: String) extends ErrorInfo
 case class Unauthorized(msg: String) extends ErrorInfo
+case class InternalServerError(msg: String) extends ErrorInfo
+
 //case class ErrorInfoCustomize(code: StatusCode, msg: String) extends ErrorInfo
 //case object NoContent extends ErrorInfo
 
@@ -19,6 +21,7 @@ trait Controller extends LogSupport with TapirJsonCirce {
       oneOfVariant(statusCode(StatusCode.NotFound).and(stringBody.mapTo[NotFound])),
       oneOfVariant(statusCode(StatusCode.BadRequest).and(stringBody.mapTo[BadRequest])),
       oneOfVariant(statusCode(StatusCode.Unauthorized).and(stringBody.mapTo[Unauthorized])),
+      oneOfVariant(statusCode(StatusCode.InternalServerError).and(stringBody.mapTo[InternalServerError]))
     )
   )
 

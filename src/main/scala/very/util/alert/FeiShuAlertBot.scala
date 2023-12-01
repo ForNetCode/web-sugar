@@ -2,11 +2,10 @@ package very.util.alert
 
 import sttp.client3.HttpClientSyncBackend
 import sttp.client3.logging.slf4j.Slf4jLoggingBackend
-import sttp.client3.ziojson.{ *, given }
 import sttp.client3.*
 import very.util.config.WithConfig
-import zio.json.*
-import zio.json.ast.{ Json, JsonCursor }
+import io.circe.*
+import sttp.client3.circe.*
 
 trait WithAlert extends WithConfig {
   import very.util.config.getOptional
@@ -24,9 +23,9 @@ class FeiShuAlertBot(url: String, secret: Option[String] = None) extends Alert {
     basicRequest
       .post(uri"$url")
       .body(
-        Json.Obj(
-          "msg_type" -> Json.Str("text"),
-          "content" -> Json.Obj("text" -> Json.Str(text)),
+        Json.obj(
+          "msg_type" -> Json.fromString("text"),
+          "content" -> Json.obj("text" -> Json.fromString(text)),
         )
       )
       .send(client)

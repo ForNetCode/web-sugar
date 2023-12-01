@@ -19,14 +19,13 @@ object Dependencies {
     "org.flywaydb" % "flyway-core" % "9.19.4",
     "io.getquill" %% "quill-jdbc" % "4.8.0",
     "org.postgresql" % "postgresql" % "42.6.0" % "compile",
-    "mysql" % "mysql-connector-java" % "8.0.17" % "compile",
+    "mysql" % "mysql-connector-java" % "8.0.33" % "compile",
   )
 
   lazy val httpClient = {
     val version = "3.9.0"
     Seq(
       "com.softwaremill.sttp.client3" %% "core" % version,
-      "com.softwaremill.sttp.client3" %% "zio-json" % version,
       "com.softwaremill.sttp.client3" %% "circe" % version,
       "com.softwaremill.sttp.client3" %% "slf4j-backend" % version,
     )

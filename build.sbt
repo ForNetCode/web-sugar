@@ -1,6 +1,5 @@
 val scala3Version = "3.3.1"
 
-
 // zio-json default value needs this
 ThisBuild / scalacOptions ++= Seq("-Yretain-trees")
 
@@ -11,12 +10,10 @@ lazy val webSugar = project
   .settings(
     name := "web-sugar",
     version := "0.1.0",
-
     scalaVersion := scala3Version,
-
     libraryDependencies ++= grpc ++ persistence ++ logLib ++ configLib ++
       httpClient ++ tapir ++ enumExtraLib ++ Seq(
-      "org.hashids" % "hashids" % "1.0.3", // hashids
-      "org.scalameta" %% "munit" % "0.7.29" % Test
-    )
+        "org.hashids" % "hashids" % "1.0.3", // hashids
+        "org.scalameta" %% "munit" % "0.7.29" % Test
+      )
   )
