@@ -9,13 +9,13 @@ import very.util.entity.{ Page, Pagination2 }
 sealed trait ErrorInfo
 case class NotFound(msg: String = "Not Exists") extends ErrorInfo
 case class BadRequest(msg: String) extends ErrorInfo
-case class Unauthorized(msg: String) extends ErrorInfo
+case class Unauthorized(msg: String = "Invalid Authorization") extends ErrorInfo
 case class InternalServerError(msg: String) extends ErrorInfo
 
 //case class ErrorInfoCustomize(code: StatusCode, msg: String) extends ErrorInfo
 //case object NoContent extends ErrorInfo
 
-trait Controller extends LogSupport with TapirJsonCirce {
+trait BasicController extends LogSupport with TapirJsonCirce {
 
   protected val route = endpoint.errorOut(
     oneOf[ErrorInfo](
