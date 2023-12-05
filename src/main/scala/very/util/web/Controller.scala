@@ -4,9 +4,10 @@ import io.circe.Printer
 import sttp.model.StatusCode
 import sttp.tapir.*
 import sttp.tapir.json.circe.TapirJsonCirce
+import very.util.entity.{ Page, Pagination2 }
 
 sealed trait ErrorInfo
-case class NotFound(msg: String) extends ErrorInfo
+case class NotFound(msg: String = "Not Exists") extends ErrorInfo
 case class BadRequest(msg: String) extends ErrorInfo
 case class Unauthorized(msg: String) extends ErrorInfo
 case class InternalServerError(msg: String) extends ErrorInfo
@@ -24,6 +25,19 @@ trait Controller extends LogSupport with TapirJsonCirce {
       oneOfVariant(statusCode(StatusCode.InternalServerError).and(stringBody.mapTo[InternalServerError]))
     )
   )
+
+  protected val paging: EndpointInput[Page] =
+    query[Int]("page")
+      .description("页数")
+      .default(1)
+      .validate(Validator.min(1))
+      .and(
+        query[Int]("limit")
+          .description("页数量")
+          .default(20)
+          .validate(Validator.min(5) and Validator.max(50))
+      )
+      .map((page, limit) => Pagination2(page, limit))(v => (v.page, v.pageSize))
 
   override val jsonPrinter: Printer = Printer.noSpaces.copy(dropNullValues = true)
 }
