@@ -5,6 +5,7 @@ import sttp.model.StatusCode
 import sttp.tapir.*
 import sttp.tapir.json.circe.TapirJsonCirce
 import very.util.entity.{ Page, Pagination2 }
+import sttp.tapir.server.model.EndpointExtensions.*
 
 sealed trait ErrorInfo
 case class NotFound(msg: String = "Not Exists") extends ErrorInfo
@@ -17,14 +18,16 @@ case class InternalServerError(msg: String) extends ErrorInfo
 
 trait BasicController extends LogSupport with TapirJsonCirce {
 
-  protected val route = endpoint.errorOut(
-    oneOf[ErrorInfo](
-      oneOfVariant(statusCode(StatusCode.NotFound).and(stringBody.mapTo[NotFound])),
-      oneOfVariant(statusCode(StatusCode.BadRequest).and(stringBody.mapTo[BadRequest])),
-      oneOfVariant(statusCode(StatusCode.Unauthorized).and(stringBody.mapTo[Unauthorized])),
-      oneOfVariant(statusCode(StatusCode.InternalServerError).and(stringBody.mapTo[InternalServerError]))
+  protected def route = endpoint
+    .errorOut(
+      oneOf[ErrorInfo](
+        oneOfVariant(statusCode(StatusCode.NotFound).and(stringBody.mapTo[NotFound])),
+        oneOfVariant(statusCode(StatusCode.BadRequest).and(stringBody.mapTo[BadRequest])),
+        oneOfVariant(statusCode(StatusCode.Unauthorized).and(stringBody.mapTo[Unauthorized])),
+        oneOfVariant(statusCode(StatusCode.InternalServerError).and(stringBody.mapTo[InternalServerError]))
+      )
     )
-  )
+    .maxRequestBodyLength(1024 * 8 * 2/*2M*/)
 
   protected val paging: EndpointInput[Page] =
     query[Int]("page")
