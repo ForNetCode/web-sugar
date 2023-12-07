@@ -33,13 +33,14 @@ object Dependencies {
 
   lazy val tapir = {
     val version = "1.9.4"
-    val circeVersion = "0.14.1"
+    val circeVersion = "0.14.6"
     Seq(
       "io.circe" %% "circe-core",
       "io.circe" %% "circe-generic",
-      "io.circe" %% "circe-parser"
+      "io.circe" %% "circe-parser",
     ).map(_ % circeVersion) ++
       Seq(
+        "io.circe" %% "circe-optics" % "0.15.0",
         "com.softwaremill.sttp.tapir" %% "tapir-netty-server" % version,
         "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % version,
         // docs

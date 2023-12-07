@@ -1,6 +1,6 @@
 val scala3Version = "3.3.1"
 
-// zio-json default value needs this
+// zio-json default value needs this, enumeration need this too
 ThisBuild / scalacOptions ++= Seq("-Yretain-trees")
 
 import Dependencies.*
