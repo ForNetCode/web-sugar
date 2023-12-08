@@ -9,7 +9,7 @@ import sttp.client3.circe.*
 
 trait WithAlert extends WithConfig {
   import very.util.config.getOptional
-  object feiShuAlertBot
+  object alertBot
     extends FeiShuAlertBot(config.getString("alert.feishu.url"), config.getOptional[String]("alert.feishu.url.secret"))
 }
 
