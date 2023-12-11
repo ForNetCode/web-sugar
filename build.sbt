@@ -1,7 +1,6 @@
 val scala3Version = "3.3.1"
 
-
-// zio-json default value needs this
+// zio-json default value needs this, enumeration need this too
 ThisBuild / scalacOptions ++= Seq("-Yretain-trees")
 
 import Dependencies.*
@@ -11,14 +10,11 @@ lazy val webSugar = project
   .settings(
     name := "web-sugar",
     version := "0.1.0",
-
     scalaVersion := scala3Version,
-
-    libraryDependencies ++= grpc ++ persistence ++ logLib ++ webServer ++ configLib ++
-      keycloakLib ++ httpClient ++ pekkoLib ++Seq(
-      "dev.zio" %% "zio-prelude" % "1.0.0-RC19", // for validate
-      "com.github.seancfoley" % "ipaddress" % "5.4.0", // for ip parse
-      "org.hashids" % "hashids" % "1.0.3", // hashids
-      "org.scalameta" %% "munit" % "0.7.29" % Test
-    )
+    libraryDependencies ++= grpc ++ persistence ++ logLib ++ tapir ++ configLib ++
+      httpClient ++ tapir ++ enumExtraLib ++ Seq(
+        "io.scalaland" %% "chimney" % "0.8.3", // case class convert easily
+        "org.hashids" % "hashids" % "1.0.3", // hashids
+        "org.scalameta" %% "munit" % "0.7.29" % Test
+      )
   )

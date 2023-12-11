@@ -8,7 +8,6 @@ object Dependencies {
     // (optional) If you need scalapb/scalapb.proto or anything from
     // google/protobuf/*.proto
     "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf",
-    // "io.jsonwebtoken" % "jjwt" % "0.9.1",
   )
 
   lazy val logLib = Seq(
@@ -20,46 +19,63 @@ object Dependencies {
     "org.flywaydb" % "flyway-core" % "9.19.4",
     "io.getquill" %% "quill-jdbc" % "4.8.0",
     "org.postgresql" % "postgresql" % "42.6.0" % "compile",
-    "mysql" % "mysql-connector-java" % "8.0.17" % "compile",
+    "mysql" % "mysql-connector-java" % "8.0.33" % "compile",
   )
 
   lazy val httpClient = {
     val version = "3.9.0"
     Seq(
       "com.softwaremill.sttp.client3" %% "core" % version,
-      "com.softwaremill.sttp.client3" %% "zio-json" % version,
+      "com.softwaremill.sttp.client3" %% "circe" % version,
       "com.softwaremill.sttp.client3" %% "slf4j-backend" % version,
     )
   }
 
-  lazy val webServer = {
-    val scalatraVersion = "3.0.0"
+  lazy val tapir = {
+    val version = "1.9.4"
+    val circeVersion = "0.14.6"
     Seq(
-      "org.scalatra" %% "scalatra-jakarta" % scalatraVersion,
-      // "org.scalatra" %% "scalatra-swagger" % scalatraVersion,
-      "org.scalatra" %% "scalatra-json-jakarta" % scalatraVersion,
-      "org.scalatra" %% "scalatra-auth-jakarta" % scalatraVersion,
-      // "org.json4s"   %% "json4s-jackson" % "4.1.0-M1",
-      // "org.json4s"   %% "json4s-ext" % "4.1.0-M1",
-      "dev.zio" %% "zio-json" % "0.6.2",
-      "org.eclipse.jetty" % "jetty-webapp" % "11.0.17" % "compile",
+      "io.circe" %% "circe-core",
+      "io.circe" %% "circe-generic",
+      "io.circe" %% "circe-parser",
+    ).map(_ % circeVersion) ++
+      Seq(
+        "io.circe" %% "circe-optics" % "0.15.0",
+        "com.softwaremill.sttp.tapir" %% "tapir-pekko-http-server" % version,
+        "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % version,
+        // docs
+        "com.softwaremill.sttp.tapir" %% "tapir-redoc-bundle" % version,
+        // static file
+        "com.softwaremill.sttp.tapir" %% "tapir-files" % version,
+        "com.softwaremill.sttp.tapir" %% "tapir-enumeratum" % version,
+        // monitor, you could use opentelemetry java agent to solve metrics collector.
+        // "com.softwaremill.sttp.tapir" %% "tapir-opentelemetry-metrics" % version,
+      )
+  }
+
+  lazy val configLib = {
+    Seq(
+      // "com.typesafe" % "config" % "1.4.2",
+      "io.circe" %% "circe-config" % "0.10.1"
     )
   }
 
-  lazy val configLib = Seq(
-    "com.typesafe" % "config" % "1.4.2"
-  )
+  lazy val enumExtraLib = {
+    val version = "1.7.3"
+    Seq(
+      "com.beachape" %% "enumeratum" % version,
+      "com.beachape" %% "enumeratum-quill" % version,
+      "com.beachape" %% "enumeratum-circe" % version,
+    )
+  }
 
-  lazy val keycloakLib = Seq(
-    "org.keycloak" % "keycloak-core" % "20.0.5", // 21.0.1: java.lang.NoClassDefFoundError: org/jboss/logging/Logger JWKSUtils.java:39
-    // "org.keycloak" % "keycloak-adapter-core" % keycloakVersion,
-    // "org.keycloak" % "keycloak-authz-client" % keycloakVersion,
 
-  )
-  val pekkoVersion = "1.0.1"
 
-  lazy val pekkoLib = Seq(
-    "org.apache.pekko" %% "pekko-actor-typed" % pekkoVersion,
-    "org.apache.pekko" %% "pekko-remote" % pekkoVersion,
-  )
+//  lazy val pekkoLib = {
+//    val pekkoVersion = "1.0.1"
+//    Seq(
+//      "org.apache.pekko" %% "pekko-actor-typed" % pekkoVersion,
+//      "org.apache.pekko" %% "pekko-remote" % pekkoVersion,
+//    )
+//  }
 }
