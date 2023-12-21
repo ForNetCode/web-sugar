@@ -27,20 +27,20 @@ trait BasicController extends LogSupport with TapirJsonCirce {
         oneOfVariant(statusCode(StatusCode.InternalServerError).and(stringBody.mapTo[InternalServerError]))
       )
     )
-    .maxRequestBodyLength(1024 * 8 * 2/*2M*/)
+    .maxRequestBodyLength(1024 * 8 * 2 /*2M*/ )
 
   protected val paging: EndpointInput[Page] =
-    query[Int]("page")
+    query[Option[Int]]("page")
       .description("页数")
-      .default(1)
-      .validate(Validator.min(1))
+      .default(Some(1))
+      .validateOption(Validator.min(1))
       .and(
-        query[Int]("limit")
+        query[Option[Int]]("limit")
           .description("页数量")
-          .default(20)
-          .validate(Validator.min(5) and Validator.max(50))
+          .default(Some(20))
+          .validateOption(Validator.min(5) and Validator.max(50))
       )
-      .map((page, limit) => Pagination2(page, limit))(v => (v.page, v.pageSize))
+      .map((page, limit) => Pagination2(page.getOrElse(1), limit.getOrElse(20)))(v => (Some(v.page), Some(v.pageSize)))
 
   override val jsonPrinter: Printer = Printer.noSpaces.copy(dropNullValues = true)
 }
