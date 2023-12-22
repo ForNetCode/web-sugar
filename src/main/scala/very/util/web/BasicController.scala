@@ -27,7 +27,7 @@ trait BasicController extends LogSupport with TapirJsonCirce {
         oneOfVariant(statusCode(StatusCode.InternalServerError).and(stringBody.mapTo[InternalServerError]))
       )
     )
-    .maxRequestBodyLength(1024 * 8 * 2 /*2M*/ )
+    .maxRequestBodyLength(1024 * 1 * 1024 /*1M*/ )
 
   protected val paging: EndpointInput[Page] =
     query[Option[Int]]("page")
