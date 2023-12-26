@@ -21,10 +21,10 @@ trait BasicController extends LogSupport with TapirJsonCirce {
   protected def route = endpoint
     .errorOut(
       oneOf[ErrorInfo](
-        oneOfVariant(statusCode(StatusCode.NotFound).and(stringBody.mapTo[NotFound])),
-        oneOfVariant(statusCode(StatusCode.BadRequest).and(stringBody.mapTo[BadRequest])),
-        oneOfVariant(statusCode(StatusCode.Unauthorized).and(stringBody.mapTo[Unauthorized])),
-        oneOfVariant(statusCode(StatusCode.InternalServerError).and(stringBody.mapTo[InternalServerError]))
+        oneOfVariant(statusCode(StatusCode.NotFound).description("Not Found").and(stringBody.mapTo[NotFound])),
+        oneOfVariant(statusCode(StatusCode.BadRequest).description("Bad Parameters").and(stringBody.mapTo[BadRequest])),
+        oneOfVariant(statusCode(StatusCode.Unauthorized).description("Invalid Authorization").and(stringBody.mapTo[Unauthorized])),
+        oneOfVariant(statusCode(StatusCode.InternalServerError).description("Server Error").and(stringBody.mapTo[InternalServerError]))
       )
     )
     .maxRequestBodyLength(1024 * 8 * 2/*2M*/)
