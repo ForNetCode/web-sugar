@@ -43,7 +43,7 @@ class ScheduledExecutor(corePoolSize: Int,
    */
   def delayExecution[T](operation: ⇒ T)(by: FiniteDuration): CancellableFuture[T] = {
     val promise = Promise[T]()
-    val scheduledFuture: ScheduledFuture[_] = underlying.schedule(new Runnable {
+    val scheduledFuture: ScheduledFuture[?] = underlying.schedule(new Runnable {
       override def run() = {
         promise.complete(Try(operation))
       }

@@ -6,7 +6,7 @@ import org.hashids.Hashids
 import very.util.security.IntID
 
 trait IDSupport {
-  this: JdbcContextTypes[PostgresDialect, _] =>
+  this: JdbcContextTypes[PostgresDialect, ?] =>
 
   given intIDEncode: MappedEncoding[IntID, Int] = MappedEncoding(_.id)
   given intIDDecode(using hashId: Hashids): MappedEncoding[Int, IntID] = MappedEncoding(IntID.apply)

@@ -12,18 +12,18 @@ object Dependencies {
 
   lazy val logLib = Seq(
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-    "ch.qos.logback" % "logback-classic" % "1.4.14",
+    "ch.qos.logback" % "logback-classic" % "1.5.3",
   )
 
   lazy val persistence = Seq(
-    "org.flywaydb" % "flyway-core" % "10.6.0",
-    "io.getquill" %% "quill-jdbc" % "4.8.1",
-    "org.postgresql" % "postgresql" % "42.7.1" % "compile",
+    "org.flywaydb" % "flyway-core" % "10.10.0",
+    "io.getquill" %% "quill-jdbc" % "4.8.3",
+    "org.postgresql" % "postgresql" % "42.7.3" % "compile",
     "mysql" % "mysql-connector-java" % "8.0.33" % "compile",
   )
 
   lazy val httpClient = {
-    val version = "3.9.2"
+    val version = "3.9.4"
     Seq(
       "com.softwaremill.sttp.client3" %% "core" % version,
       "com.softwaremill.sttp.client3" %% "circe" % version,
@@ -32,7 +32,7 @@ object Dependencies {
   }
 
   lazy val tapir = {
-    val version = "1.9.8"
+    val version = "1.10.0"
     val circeVersion = "0.14.6"
     Seq(
         "io.circe" %% "circe-core",

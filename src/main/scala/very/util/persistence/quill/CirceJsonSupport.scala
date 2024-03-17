@@ -8,7 +8,7 @@ import io.circe.parser.*
 
 trait DBSerializer
 trait CirceJsonSupport {
-  this: JdbcContextTypes[PostgresDialect, _] =>
+  this: JdbcContextTypes[PostgresDialect, ?] =>
 
   private val jsonPrinter: Printer = Printer.noSpaces.copy(dropNullValues = true)
 
