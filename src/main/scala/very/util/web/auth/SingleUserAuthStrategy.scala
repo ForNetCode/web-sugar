@@ -1,5 +1,4 @@
 package very.util.web.auth
-import io.getquill.ast.CaseClass.Single.apply
 
 //This is the easy way to auth
 class SingleUserAuthStrategy[User](selfDefinedToken: String, user: User)

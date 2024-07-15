@@ -9,7 +9,7 @@ object IntEnumTest {
 
   sealed abstract class Judgement(val value: Int) extends IntEnumEntry
 
-  object Judgement extends IntEnum[Judgement] with IntCirceEnum[Judgement] with IntQuillEnum[Judgement]{
+  object Judgement extends IntEnum[Judgement] with IntCirceEnum[Judgement] {
 
     case object Good extends Judgement(1)
 
@@ -29,7 +29,7 @@ object StringEnumTest {
 
   sealed trait ShirtSize extends EnumEntry
 
-  case object ShirtSize extends Enum[ShirtSize] with CirceEnum[ShirtSize] with QuillEnum[ShirtSize] {
+  case object ShirtSize extends Enum[ShirtSize] with CirceEnum[ShirtSize] {
 
     case object Small extends ShirtSize
 
