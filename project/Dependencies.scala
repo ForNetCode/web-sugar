@@ -12,18 +12,20 @@ object Dependencies {
 
   lazy val logLib = Seq(
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-    "ch.qos.logback" % "logback-classic" % "1.5.3",
+    "ch.qos.logback" % "logback-classic" % "1.5.6",
   )
 
   lazy val persistence = Seq(
-    "org.flywaydb" % "flyway-core" % "10.10.0",
-    "io.getquill" %% "quill-jdbc" % "4.8.4",
+    "org.flywaydb" % "flyway-core" % "10.15.2",
+    // "io.getquill" %% "quill-jdbc" % "4.8.4",
+    "org.scalikejdbc" %% "scalikejdbc-orm" % "4.3.0",
+    "org.scalikejdbc" %% "scalikejdbc-test"   % "4.3.0"   % "test",
     "org.postgresql" % "postgresql" % "42.7.3" % "compile",
     "mysql" % "mysql-connector-java" % "8.0.33" % "compile",
   )
 
   lazy val httpClient = {
-    val version = "3.9.4"
+    val version = "3.9.7"
     Seq(
       "com.softwaremill.sttp.client3" %% "core" % version,
       "com.softwaremill.sttp.client3" %% "circe" % version,
@@ -32,10 +34,10 @@ object Dependencies {
   }
 
   lazy val tapir = {
-    val version = "1.10.0"
+    val version = "1.10.13"
     val circeVersion = "0.14.6"
     Seq(
-        "io.circe" %% "circe-core",
+      "io.circe" %% "circe-core",
       "io.circe" %% "circe-generic",
       "io.circe" %% "circe-parser",
     ).map(_ % circeVersion) ++
@@ -48,7 +50,7 @@ object Dependencies {
         // static file
         "com.softwaremill.sttp.tapir" %% "tapir-files" % version,
         "com.softwaremill.sttp.tapir" %% "tapir-enumeratum" % version,
-        // monitor, you could use opentelemetry java agent to solve metrics collector.
+        // monitor, you could use openTelemetry java agent to solve metrics collector.
         // "com.softwaremill.sttp.tapir" %% "tapir-opentelemetry-metrics" % version,
       )
   }
@@ -61,13 +63,13 @@ object Dependencies {
   }
 
   lazy val enumExtraLib = {
-    val version = "1.7.3"
+    val version = "1.7.4"
     Seq(
       "com.beachape" %% "enumeratum" % version,
-      "com.beachape" %% "enumeratum-quill" % version,
+      // "com.beachape" %% "enumeratum-quill" % version,
       "com.beachape" %% "enumeratum-circe" % version,
     )
   }
 
-  lazy val templateLib = Seq("nl.big-o" % "liqp"% "0.8.5.3")
+  // lazy val templateLib = Seq("nl.big-o" % "liqp"% "0.9.0.3")
 }
