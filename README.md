@@ -10,7 +10,7 @@ So instead of using this project as well promised web framework, just treat it a
 ## The dependencies the project used
 ### DB
 We choose Postgres for its wonderful complex index support, like array/bson/geo. 
-Protoquill is used as ORM, because at this time(2022/9), It is the only choice of ORM which supports Scala 3.
+scalikejdbc-ORM is used as ORM.
 Flyway is used as database migration tool.
 ### Web Framework: Tapir with Netty
 We have switched from Scalatra, for it has no well mixed Swagger, OpenTelemetry, zio-json(Swagger With json4s、metrics is Ok).
