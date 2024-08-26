@@ -1,4 +1,4 @@
-val scala3Version = "3.4.0"
+val scala3Version = "3.5.0"
 
 // zio-json default value needs this, enumeration need this too
 ThisBuild / scalacOptions ++= Seq("-Yretain-trees")
