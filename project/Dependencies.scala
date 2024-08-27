@@ -16,10 +16,9 @@ object Dependencies {
   )
 
   lazy val persistence = Seq(
-    "org.flywaydb" % "flyway-core" % "10.15.2",
-    // "io.getquill" %% "quill-jdbc" % "4.8.4",
-    "org.scalikejdbc" %% "scalikejdbc-orm" % "4.3.0",
-    "org.scalikejdbc" %% "scalikejdbc-test"   % "4.3.0"   % "test",
+    "org.flywaydb" % "flyway-core" % "10.17.2",
+    "org.scalikejdbc" %% "scalikejdbc-orm" % "4.3.1",
+    "org.scalikejdbc" %% "scalikejdbc-test"   % "4.3.1"   % "test",
     "org.postgresql" % "postgresql" % "42.7.3" % "compile",
     "mysql" % "mysql-connector-java" % "8.0.33" % "compile",
   )
@@ -34,8 +33,8 @@ object Dependencies {
   }
 
   lazy val tapir = {
-    val version = "1.10.13"
-    val circeVersion = "0.14.6"
+    val version = "1.10.15"
+    val circeVersion = "0.14.9"
     Seq(
       "io.circe" %% "circe-core",
       "io.circe" %% "circe-generic",

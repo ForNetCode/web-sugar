@@ -32,7 +32,7 @@ object DatabaseInit {
 
     val generatorConfig = GeneratorConfig(
       packageName = "com.timzaak.entity",
-      dateTimeClass = DateTimeClass.JodaDateTime,
+      dateTimeClass = DateTimeClass.OffsetDateTime,
       daoExtendImport = Some("very.util.persistence.scalikejdbc.Dao")
     )
     // where table to generate
