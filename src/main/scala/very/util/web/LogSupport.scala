@@ -22,11 +22,11 @@ trait LogSupport {
 
   protected inline def logFuture[T](inline errorMessage: String)(inline func: T)(using ExecutionContext): Future[T] = {
     val result = Future(func)
-    result.onComplete(_ match {
+    result.onComplete {
       case Failure(exception) =>
         logger.warn(errorMessage, exception)
       case _ =>
-    })
+    }
     result
 
   }
