@@ -6,9 +6,7 @@ import java.util.UUID
 import scalikejdbc._
 //TODO: https://blog.csdn.net/qq_31156277/article/details/85260325
 
-case class Model(url: String, username: String, password: String) extends AutoCloseable {
-
-  private val poolName = UUID.randomUUID
+case class Model(url: String, username: String, password: String, poolName: String = "default") extends AutoCloseable {
 
   locally {
     ConnectionPool.add(name = poolName, url = url, user = username, password = password)
@@ -88,6 +86,8 @@ case class Model(url: String, username: String, password: String) extends AutoCl
     }
   }
 
+  def getConnectionPool: ConnectionPool = ConnectionPool.get(poolName)
+  
   def close(): Unit = {
     ConnectionPool.close(poolName)
   }

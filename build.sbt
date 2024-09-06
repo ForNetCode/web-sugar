@@ -17,6 +17,7 @@ lazy val webSugar = project
         "io.scalaland" %% "chimney" % "1.4.0", // case class convert easily
         "org.hashids" % "hashids" % "1.0.3", // hashids
         "com.github.pathikrit" %% "better-files" % "3.9.2",
-        "org.scalameta" %% "munit" % "1.0.0" % Test
-      )
+        "org.scalameta" %% "munit" % "1.0.0" % Test,
+        "org.xerial" % "sqlite-jdbc" % "3.46.1.0" % Test,
+    )
   )

@@ -13,11 +13,13 @@ We choose Postgres for its wonderful complex index support, like array/bson/geo.
 scalikejdbc-ORM is used as ORM.
 Flyway is used as database migration tool.
 
-#### Code Generate From Database
+#### ~~Code Generate From Database~~
+This has some bugs to fix. 
 `very.util.persistence.scalikejdbc.mapper` is from scalikejdbc official code source. We rewrite it to match our own needs.  
 ```scala
 import com.typesafe.config.ConfigFactory
-import very.util.persistence.scalikejdbc.mapper.{CodeGenerator, DateTimeClass, GeneratorConfig}
+import very.util.persistence.scalikejdbc.mapper.{Model, CodeGenerator, DateTimeClass, GeneratorConfig}
+
 
 object DatabaseInit {
   def main(args:Array[String]):Unit = {
@@ -28,7 +30,7 @@ object DatabaseInit {
     val driver = config.getString("db.default.driver")
     Class.forName(driver)
 
-    val model = scalikejdbc.mapper.Model(url, username, password)
+    val model = Model(url, username, password)
 
     val generatorConfig = GeneratorConfig(
       packageName = "com.timzaak.entity",

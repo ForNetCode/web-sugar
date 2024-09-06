@@ -225,8 +225,8 @@ class CodeGenerator(table: Table, specifiedClassName: Option[String] = None)(
     val idTypeOpt = table.primaryKeyColumns.headOption.map(_.typeInScala)
     val hasTimestampFeature = table.allColumns.exists(_.nameInScala == "updatedAt")
     val extendBase = (hasTimestampFeature, idTypeOpt) match {
-      case (true, Some(typ))  => "TimestampsFeatureWithId"
-      case (false, Some(typ)) => "CRUDFeatureWithId"
+      case (true, Some(typ))  => "TimestampsWithId"
+      case (false, Some(typ)) => "CRUDMapperWithId"
       case (true, _)          => "NoIdTimestampsFeature"
       case _                  => "NoIdCUDFeature"
     }
@@ -246,8 +246,7 @@ class CodeGenerator(table: Table, specifiedClassName: Option[String] = None)(
       case Some(imp) => s"extends ${imp.split('.').last} with $extendBase[$extendParam]"
       case None      => s"extends $extendBase[$extendParam]"
     }
-    s"""import skinny.orm.Alias
-       |import skinny.orm.feature.$extendBase
+    s"""import scalikejdbc.orm.*
        |
        |trait ${className}Dao $extendStr{
        |  override val tableName:String = "${table.name}"
