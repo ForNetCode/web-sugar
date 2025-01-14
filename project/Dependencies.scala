@@ -2,29 +2,29 @@ import sbt.*
 
 object Dependencies {
 
-  lazy val grpc = Seq(
-    "io.grpc" % "grpc-netty" % scalapb.compiler.Version.grpcJavaVersion,
-    "com.thesamet.scalapb" %% "scalapb-runtime-grpc" % scalapb.compiler.Version.scalapbVersion,
-    // (optional) If you need scalapb/scalapb.proto or anything from
-    // google/protobuf/*.proto
-    "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf",
-  )
+//  lazy val grpc = Seq(
+//    "io.grpc" % "grpc-netty" % scalapb.compiler.Version.grpcJavaVersion,
+//    "com.thesamet.scalapb" %% "scalapb-runtime-grpc" % scalapb.compiler.Version.scalapbVersion,
+//    // (optional) If you need scalapb/scalapb.proto or anything from
+//    // google/protobuf/*.proto
+//    "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf",
+//  )
 
   lazy val logLib = Seq(
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-    "ch.qos.logback" % "logback-classic" % "1.5.6",
+    "ch.qos.logback" % "logback-classic" % "1.5.16",
   )
 
   lazy val persistence = Seq(
-    "org.flywaydb" % "flyway-core" % "10.17.2",
-    "org.scalikejdbc" %% "scalikejdbc-orm" % "4.3.1",
-    "org.scalikejdbc" %% "scalikejdbc-test"   % "4.3.1"   % "test",
-    "org.postgresql" % "postgresql" % "42.7.3" % "compile",
+    "org.flywaydb" % "flyway-core" % "11.1.1",
+    "org.scalikejdbc" %% "scalikejdbc-orm" % "4.3.2",
+    "org.scalikejdbc" %% "scalikejdbc-test"   % "4.3.2"   % "test",
+    "org.postgresql" % "postgresql" % "42.7.4" % "compile",
     "mysql" % "mysql-connector-java" % "8.0.33" % "compile",
   )
 
   lazy val httpClient = {
-    val version = "3.9.7"
+    val version = "3.10.2"
     Seq(
       "com.softwaremill.sttp.client3" %% "core" % version,
       "com.softwaremill.sttp.client3" %% "circe" % version,
@@ -33,7 +33,7 @@ object Dependencies {
   }
 
   lazy val tapir = {
-    val version = "1.10.15"
+    val version = "1.11.12"
     val circeVersion = "0.14.9"
     Seq(
       "io.circe" %% "circe-core",
@@ -62,7 +62,7 @@ object Dependencies {
   }
 
   lazy val enumExtraLib = {
-    val version = "1.7.4"
+    val version = "1.7.5"
     Seq(
       "com.beachape" %% "enumeratum" % version,
       // "com.beachape" %% "enumeratum-quill" % version,
