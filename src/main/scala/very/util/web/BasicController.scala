@@ -40,7 +40,9 @@ trait BasicController extends LogSupport with TapirJsonCirce {
           .default(Some(20))
           .validateOption(Validator.min(5) and Validator.max(50))
       )
-      .map((page, limit) => Pagination2(page.getOrElse(1), limit.getOrElse(20)))(v => (Some(v.page), Some(v.pageSize)))
+      .map((page, limit) =>
+        Pagination2(page.getOrElse(1), limit.getOrElse(20))
+      )(v => (Some(v.page), Some(v.pageSize)))
 
-  override val jsonPrinter: Printer = Printer.noSpaces.copy(dropNullValues = true)
+  override val jsonPrinter: Printer = JsonConfig.jsonPrinter
 }

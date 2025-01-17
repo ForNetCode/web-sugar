@@ -16,10 +16,10 @@ object Dependencies {
   )
 
   lazy val persistence = Seq(
-    "org.flywaydb" % "flyway-core" % "11.1.1",
-    "org.scalikejdbc" %% "scalikejdbc-orm" % "4.3.2",
-    "org.scalikejdbc" %% "scalikejdbc-test"   % "4.3.2"   % "test",
-    "org.postgresql" % "postgresql" % "42.7.4" % "compile",
+    "org.flywaydb" % "flyway-core" % "11.2.0",
+    "org.flywaydb" % "flyway-database-postgresql" % "11.2.0",
+    "com.lihaoyi" %% "scalasql" % "0.1.15",
+    "org.postgresql" % "postgresql" % "42.7.5" % "compile",
     "mysql" % "mysql-connector-java" % "8.0.33" % "compile",
   )
 
