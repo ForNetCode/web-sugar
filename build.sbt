@@ -12,12 +12,14 @@ lazy val webSugar = project
     version := "0.1.0",
     scalaVersion := scala3Version,
     libraryDependencies ++= /* grpc ++ */ persistence ++ logLib ++ configLib ++
-      httpClient ++ tapir ++ enumExtraLib ++ Seq(
+      httpClient ++ tapir ++ enumExtraLib ++ quartzLib ++ jwkLib ++ Seq(
+        "me.wojnowski" %% "oidc4s-quick-sttp-circe" % "0.13.1",
+        "org.mindrot" % "jbcrypt" % "0.4",
         "redis.clients" % "jedis" % "5.2.0",
-        "io.scalaland" %% "chimney" % "1.6.0", // case class convert easily
+        "io.scalaland" %% "chimney" % "1.7.0", // case class convert easily
         "org.hashids" % "hashids" % "1.0.3", // hashids
         "com.github.pathikrit" %% "better-files" % "3.9.2",
-        "org.scalameta" %% "munit" % "1.0.4" % Test,
+        "org.scalameta" %% "munit" % "1.1.0" % Test,
         // "org.xerial" % "sqlite-jdbc" % "3.47.2.0" % Test,
-    )
+      )
   )

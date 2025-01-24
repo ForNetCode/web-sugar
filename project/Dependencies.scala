@@ -70,5 +70,17 @@ object Dependencies {
     )
   }
 
+  lazy val quartzLib = {
+    Seq(
+      "org.quartz-scheduler" % "quartz" % "2.5.0",
+    )
+  }
+
+  lazy val jwkLib = {
+    Seq(
+      "org.pac4j" % "pac4j-jwt" % "6.1.0"
+    )
+  }
+
   // lazy val templateLib = Seq("nl.big-o" % "liqp"% "0.9.0.3")
 }

@@ -11,9 +11,9 @@ import io.circe.parser.*
 
 trait RedisSession[Target: Encoder: Decoder](
   jedis: JedisPooled,
-  expired: Duration
+  prefix: String = "p:",
+  expired: Duration = Duration.Zero
 ) {
-  private val prefix = "p:"
 
   def session(token: String): Option[Target] =
     Option(jedis.get(s"$prefix$token")).map(v => decode[Target](v).toOption.get)
@@ -21,7 +21,7 @@ trait RedisSession[Target: Encoder: Decoder](
   def setSession(token: String, value: Target) = {
     val key = s"$prefix$token"
     jedis.set(key, JsonConfig.jsonPrinter.print(value.asJson))
-    if(expired != Duration.Zero){
+    if (expired != Duration.Zero) {
       jedis.expire(key, expired.toSeconds)
     }
   }
