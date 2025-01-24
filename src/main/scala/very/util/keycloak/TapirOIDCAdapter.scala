@@ -69,6 +69,21 @@ class TapirOIDCAdapter(
     Option(jwtAuth.validateToken(rawToken))
   }
 
+  def tokenExtract[F[_]] = endpoint
+    .errorOut(
+      statusCode(StatusCode.Unauthorized)
+        .and(stringBody.mapTo[TokenInvalid])
+    )
+    .securityIn(auth.bearer[String]())
+    .serverSecurityLogicPure[UserProfile, F] { token =>
+      validateToken(token) match {
+        case Some(userProfile) =>
+          Right(userProfile)
+        case _ =>
+          Left(TokenInvalid())
+      }
+    }
+
   def hasRole[F[_]](roles: String*) = {
     endpoint
       .errorOut(
