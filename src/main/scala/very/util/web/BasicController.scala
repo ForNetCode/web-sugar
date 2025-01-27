@@ -4,7 +4,7 @@ import io.circe.Printer
 import sttp.model.StatusCode
 import sttp.tapir.*
 import sttp.tapir.json.circe.TapirJsonCirce
-import very.util.entity.{ Page, Pagination2 }
+import very.util.entity.{Offset, Page}
 import sttp.tapir.server.model.EndpointExtensions.*
 
 //sealed trait ErrorInfo
@@ -30,19 +30,18 @@ trait BasicController extends LogSupport with TapirJsonCirce {
 //    .maxRequestBodyLength(1024 * 1 * 1024 /*1M*/ )
 
   protected val paging: EndpointInput[Page] =
-    query[Option[Int]]("page")
-      .description("页数")
-      .default(Some(1))
-      .validateOption(Validator.min(1))
+    query[Int]("_start")
+      .description("start")
+      .default(10)
       .and(
-        query[Option[Int]]("limit")
-          .description("页数量")
-          .default(Some(20))
-          .validateOption(Validator.min(5) and Validator.max(50))
-      )
-      .map((page, limit) =>
-        Pagination2(page.getOrElse(1), limit.getOrElse(20))
-      )(v => (Some(v.page), Some(v.pageSize)))
+        query[Int]("_end")
+          .description("end")
+          .default(1)
+      ).validate(Validator.custom((start,end) =>
+        ValidationResult.validWhen(end-start <=100 && end > start && start>=0), Some("end and start should > 0 and end - start <=10")))
+      .map((start, end) =>
+        Offset(start, end): Page
+      )(v => (v.offset, v.limit + v.offset))
 
   override val jsonPrinter: Printer = JsonConfig.jsonPrinter
 }
