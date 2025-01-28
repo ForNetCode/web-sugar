@@ -24,11 +24,4 @@ class CirceSuite extends munit.FunSuite {
     val a:Short = 1
     println(ShortExample(List(a)).asJson)
   }
-
-  test("short value decode2") {
-    import io.circe.syntax.*
-    import io.circe.generic.auto.*
-    val a: Short = 1
-    println(List(ExampleSingleValue(a)).asJson)
-  }
 }
