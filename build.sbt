@@ -12,7 +12,7 @@ lazy val webSugar = project
     version := "0.1.0",
     scalaVersion := scala3Version,
     libraryDependencies ++= /* grpc ++ */ persistence ++ logLib ++ configLib ++
-      httpClient ++ tapir ++ enumExtraLib ++ quartzLib ++ jwkLib ++ Seq(
+      httpClient ++ tapir ++ enumExtraLib ++ quartzLib ++ jwkLib ++ rocketMQLib ++ Seq(
         "me.wojnowski" %% "oidc4s-quick-sttp-circe" % "0.13.1",
         "org.mindrot" % "jbcrypt" % "0.4",
         "redis.clients" % "jedis" % "5.2.0",

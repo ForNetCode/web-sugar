@@ -82,5 +82,11 @@ object Dependencies {
     )
   }
 
+  lazy val rocketMQLib = {
+    Seq(
+      "org.apache.rocketmq" % "rocketmq-client-java" % "5.0.7",
+    )
+  }
+
   // lazy val templateLib = Seq("nl.big-o" % "liqp"% "0.9.0.3")
 }
