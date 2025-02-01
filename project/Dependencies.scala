@@ -16,9 +16,10 @@ object Dependencies {
   )
 
   lazy val persistence = Seq(
-    "org.flywaydb" % "flyway-core" % "11.2.0",
-    "org.flywaydb" % "flyway-database-postgresql" % "11.2.0",
+    "org.flywaydb" % "flyway-core" % "11.3.0",
+    "org.flywaydb" % "flyway-database-postgresql" % "11.3.0",
     "com.lihaoyi" %% "scalasql" % "0.1.15",
+    "com.zaxxer" % "HikariCP" % "6.2.1",
     "org.postgresql" % "postgresql" % "42.7.5" % "compile",
     "mysql" % "mysql-connector-java" % "8.0.33" % "compile",
   )
@@ -78,7 +79,8 @@ object Dependencies {
 
   lazy val jwkLib = {
     Seq(
-      "org.pac4j" % "pac4j-jwt" % "6.1.0"
+      "org.pac4j" % "pac4j-jwt" % "6.1.0",
+      // "org.keycloak" % "keycloak-admin-client" % "26.0.4",
     )
   }
 

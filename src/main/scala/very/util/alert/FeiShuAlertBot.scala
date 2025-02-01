@@ -1,6 +1,5 @@
 package very.util.alert
 
-import sttp.client3.HttpClientSyncBackend
 import sttp.client3.logging.slf4j.Slf4jLoggingBackend
 import sttp.client3.*
 import very.util.config.WithConfig
