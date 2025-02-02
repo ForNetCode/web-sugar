@@ -31,4 +31,4 @@ metals.sbt
 .idea_modules
 /.worksheet/
 
-src/test/resources/application.conf
+src/test/resources/private.conf

@@ -90,5 +90,10 @@ object Dependencies {
     )
   }
 
+  lazy val aiLib = {
+    Seq(
+      "com.softwaremill.sttp.openai" %% "core" % "0.2.6"
+    )
+  }
   // lazy val templateLib = Seq("nl.big-o" % "liqp"% "0.9.0.3")
 }

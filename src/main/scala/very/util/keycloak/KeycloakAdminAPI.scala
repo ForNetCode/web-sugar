@@ -24,7 +24,7 @@ object KeycloakConfig {
     config.as[KeycloakConfig].toTry.get
   }
 }
-// https://www.keycloak.org/docs-api/26.1.0/rest-api/#_clients
+
 case class TokenResponse(access_token: String, refresh_token: String, expires_in: Int)
 
 case class UserRepresentation(
@@ -35,21 +35,15 @@ case class UserRepresentation(
   realmRoles: List[String],
 )
 
+// https://www.keycloak.org/docs-api/26.1.0/rest-api/#_clients
 class KeycloakAdminAPI(config: KeycloakConfig, httpClient: SttpBackend[Identity, Any]) extends LogSupport {
 
   private var _refreshToken: Option[String] = None
   private var _token: String = null
-  /*
-  {
-   "access_token" : ".....",
-   "refresh_token" : ".....",
-   "expires_in" : "...."
- }
-   */
+
   def getTokenByPassword() = {
     val result = basicRequest
       .post(uri"${config.url}/realms/master/protocol/openid-connect/token")
-      // .contentType("application/x-www-form-urlencoded")
       .body(
         Map(
           "grant_type" -> "password",
@@ -69,7 +63,6 @@ class KeycloakAdminAPI(config: KeycloakConfig, httpClient: SttpBackend[Identity,
   def getTokenByRefreshToken(refreshToken: String) = {
     basicRequest
       .post(uri"${config.url}/realms/master/protocol/openid-connect/token")
-      .response(asJsonAlways[TokenResponse])
       .body(
         Map(
           "grant_type" -> "refresh_token",
@@ -78,7 +71,9 @@ class KeycloakAdminAPI(config: KeycloakConfig, httpClient: SttpBackend[Identity,
           "scope" -> "openid",
         )
       )
+      .response(asJsonAlways[TokenResponse])
       .send(httpClient)
+      .body
   }
   // schedule to refresh token
   // https://stackoverflow.com/questions/51386337/refresh-access-token-via-refresh-token-in-keycloak
@@ -98,12 +93,21 @@ class KeycloakAdminAPI(config: KeycloakConfig, httpClient: SttpBackend[Identity,
     }
   }
 
-  // GET /admin/realms/{realm}/users/{user-id}
   def getUserInfo(realm: String, userId: String) = {
     val result = basicRequest
       .get(uri"${config.url}/admin/realms/$realm/users/$userId")
       .header("Authorization", s"Bearer ${_token}")
       .response(asJsonAlways[UserRepresentation])
+      .send(httpClient)
+      .body
+    result
+  }
+
+  def getUserInfoByUsername(realm: String, username: String) = {
+    basicRequest
+      .get(uri"${config.url}/admin/realms/$realm/users?username=$username")
+      .header("Authorization", s"Bearer ${_token}")
+      .response(asJsonAlways[List[UserRepresentation]])
       .send(httpClient)
       .body
   }
