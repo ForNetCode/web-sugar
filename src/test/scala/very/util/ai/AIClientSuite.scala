@@ -11,15 +11,15 @@ import sttp.openai.requests.completions.chat.ChatRequestBody.ChatCompletionModel
 import sttp.openai.requests.completions.chat.message.*
 import sttp.openai.requests.completions.chat.message.Message.UserMessage
 
-class OpenAISuite extends FunSuite {
+class AIClientSuite extends FunSuite {
   lazy val config = AIClientConfig.loadFromConfig(ConfigFactory.load().getConfig("ai"))
   test("simple") {
-    // val options = BackendOptions.Default
-    val options = BackendOptions.httpProxy("127.0.0.1", 7890)
+    val options = BackendOptions.Default
+    // val options = BackendOptions.httpProxy("127.0.0.1", 7890)
     val backend = HttpClientSyncBackend(options = options)
 
     val client = OpenAISyncClient(config.key, backend, uri"${config.url}")
-
+    // val client = OpenAISyncClient(config.key, backend, uri"${config.url}")
     val body = ChatBody(
       model = CustomChatCompletionModel(config.model),
       messages = List(

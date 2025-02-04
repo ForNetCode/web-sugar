@@ -11,7 +11,6 @@ import very.util.web.LogSupport
 
 case class KeycloakConfig(
   url: String,
-  // realm:String =
   user: String,
   password: String,
 )
