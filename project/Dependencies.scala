@@ -16,8 +16,8 @@ object Dependencies {
   )
 
   lazy val persistence = Seq(
-    "org.flywaydb" % "flyway-core" % "11.3.0",
-    "org.flywaydb" % "flyway-database-postgresql" % "11.3.0",
+    "org.flywaydb" % "flyway-core" % "11.3.1",
+    "org.flywaydb" % "flyway-database-postgresql" % "11.3.1",
     "com.lihaoyi" %% "scalasql" % "0.1.15",
     "com.zaxxer" % "HikariCP" % "6.2.1",
     "org.postgresql" % "postgresql" % "42.7.5" % "compile",
@@ -25,7 +25,7 @@ object Dependencies {
   )
 
   lazy val httpClient = {
-    val version = "3.10.2"
+    val version = "3.10.3"
     Seq(
       "com.softwaremill.sttp.client3" %% "core" % version,
       "com.softwaremill.sttp.client3" %% "circe" % version,
@@ -79,7 +79,7 @@ object Dependencies {
 
   lazy val jwkLib = {
     Seq(
-      "org.pac4j" % "pac4j-jwt" % "6.1.0",
+      "org.pac4j" % "pac4j-jwt" % "6.1.1",
       // "org.keycloak" % "keycloak-admin-client" % "26.0.4",
     )
   }
@@ -92,7 +92,7 @@ object Dependencies {
 
   lazy val aiLib = {
     Seq(
-      "com.softwaremill.sttp.openai" %% "core" % "0.2.6"
+      "com.softwaremill.sttp.openai" %% "core" % "0.2.6",
     )
   }
   // lazy val templateLib = Seq("nl.big-o" % "liqp"% "0.9.0.3")
