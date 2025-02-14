@@ -34,7 +34,7 @@ object Dependencies {
   }
 
   lazy val tapir = {
-    val version = "1.11.12"
+    val version = "1.11.14"
     val circeVersion = "0.14.9"
     Seq(
       "io.circe" %% "circe-core",

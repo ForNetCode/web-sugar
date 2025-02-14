@@ -17,7 +17,7 @@ lazy val webSugar = project
       httpClient ++ tapir ++ enumExtraLib ++ quartzLib ++ jwkLib ++ rocketMQLib ++ aiLib ++ Seq(
         "org.mindrot" % "jbcrypt" % "0.4",
         "redis.clients" % "jedis" % "5.2.0",
-        "io.scalaland" %% "chimney" % "1.7.2", // case class convert easily
+        "io.scalaland" %% "chimney" % "1.7.3", // case class convert easily
         "org.hashids" % "hashids" % "1.0.3", // hashids
         "com.github.pathikrit" %% "better-files" % "3.9.2",
         "org.scalameta" %% "munit" % "1.1.0" % Test,
