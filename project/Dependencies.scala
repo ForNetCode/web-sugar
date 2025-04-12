@@ -16,8 +16,8 @@ object Dependencies {
   )
 
   lazy val persistence = Seq(
-    "org.flywaydb" % "flyway-core" % "11.3.1",
-    "org.flywaydb" % "flyway-database-postgresql" % "11.3.1",
+    "org.flywaydb" % "flyway-core" % "11.3.2",
+    "org.flywaydb" % "flyway-database-postgresql" % "11.3.2",
     "com.lihaoyi" %% "scalasql" % "0.1.15",
     "com.zaxxer" % "HikariCP" % "6.2.1",
     "org.postgresql" % "postgresql" % "42.7.5" % "compile",

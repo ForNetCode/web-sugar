@@ -8,7 +8,7 @@ import sttp.openai.OpenAISyncClient
 import sttp.openai.requests.completions.chat.ChatRequestBody.*
 import sttp.openai.requests.completions.chat.ChatRequestBody.ChatCompletionModel.CustomChatCompletionModel
 import sttp.openai.requests.completions.chat.message.*
-import sttp.openai.requests.completions.chat.message.Message.{ ToolMessage, UserMessage }
+import sttp.openai.requests.completions.chat.message.Message.{SystemMessage, ToolMessage, UserMessage}
 import sttp.openai.requests.completions.chat.message.Tool.FunctionTool
 
 class AIClientSuite extends FunSuite {
@@ -28,6 +28,20 @@ class AIClientSuite extends FunSuite {
       model = CustomChatCompletionModel(config.model),
       messages = List(
         UserMessage(content = Content.TextContent("Hello"))
+      )
+    )
+    val chatResponse = client.createChatCompletion(body)
+    println(chatResponse)
+  }
+
+  test("build a tool") {
+    val client = getClient
+    val text = """""".stripMargin
+    val body = ChatBody(
+      model = CustomChatCompletionModel(config.model),
+      messages = List(
+        SystemMessage(content = "你是一个专业的互联网全栈工程师，移动端、web端、后台都有做过。"),
+        UserMessage(content = Content.TextContent("请你依据以下简历需求，写一个简单的自我介绍， 字数在50字以内：\n" + text))
       )
     )
     val chatResponse = client.createChatCompletion(body)
