@@ -10,17 +10,19 @@ So instead of using this project as well promised web framework, just treat it a
 ## The dependencies the project used
 ### DB
 We choose Postgres for its wonderful complex index support, like array/bson/geo. 
-scalasql is used as ORM.
-Flyway is used as database migration tool.
+
+Scalasql is used as ORM.
+
+Flyway is used as a database migration tool.
 
 ### Web Framework: Tapir with Netty
-We have switched from Scalatra, for it has no well mixed Swagger, OpenTelemetry, zio-json(Swagger With json4s、metrics is Ok).
+We have switched from Scalatra, for it has no well mixed Swagger, OpenTelemetry.
 ### Http Client: sttp
-We used scalaj-http at Scala 2, but it's archived now. So we switch to sttp which provide wrapper of `HttpClient`, It also has very useful plugins.
+We used scalaj-http at Scala 2, but it's archived now. So we switch to sttp which provide wrapper of `HttpClient`, It also has invaluable plugins.
 ### Json:  circe
-Both zio-json and circe is ok, they all support Scala 3 well(except enum). But zio-json need more template code.
+Both zio-json and circe are ok, they all support Scala 3 well(except enum). But zio-json needs more template code.
 ### GRPC: ScalaPB
-There's no alternative choose of GRPC at Scala world. and we choose Netty runtime of GRPC.
+There's no alternative of GRPC in the Scala world. And we choose Netty runtime of GRPC.
 ### Others:
 #### Typesafe Config
 Scala world love typesafe config, others not.
@@ -29,7 +31,7 @@ Scala world love typesafe config, others not.
 We provide [startup template](https://github.com/ForNetCode/web-sugar-startup) for this project.
 
 ## What's more
-Sometimes we would rewrite the codebase if it could not support our projects, just like switch Scalatra to Playframework for Async. So we could not promise this project would be long term support.
+Sometimes we would rewrite the codebase if it could not support our projects, just like switch Scalatra to Tapir for Async. So we could not promise this project would be long-term support.
 
 ## License
 Apache License 2.0
