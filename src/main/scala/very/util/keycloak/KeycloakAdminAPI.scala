@@ -2,8 +2,8 @@ package very.util.keycloak
 
 import com.typesafe.config.Config
 import org.quartz.SimpleScheduleBuilder
-import sttp.client3.*
-import sttp.client3.circe.*
+import sttp.client4.*
+import sttp.client4.circe.*
 import io.circe.generic.auto.*
 import very.util.task.executor.singleTaskExecutor
 import very.util.task.{ QuartzManager, UnitTask }
@@ -35,7 +35,7 @@ case class UserRepresentation(
 )
 
 // https://www.keycloak.org/docs-api/26.1.0/rest-api/#_clients
-class KeycloakAdminAPI(config: KeycloakConfig, httpClient: SttpBackend[Identity, Any]) extends LogSupport {
+class KeycloakAdminAPI(config: KeycloakConfig, httpClient: SyncBackend) extends LogSupport {
 
   private var _refreshToken: Option[String] = None
   private var _token: String = null

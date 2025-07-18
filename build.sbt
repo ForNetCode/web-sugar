@@ -1,4 +1,4 @@
-val scala3Version = "3.6.2"
+val scala3Version = "3.7.1"
 
 // enumeration need this
 ThisBuild / scalacOptions ++= Seq("-Yretain-trees")
@@ -16,11 +16,11 @@ lazy val webSugar = project
     libraryDependencies ++= /* grpc ++ */ persistence ++ logLib ++ configLib ++
       httpClient ++ tapir ++ enumExtraLib ++ quartzLib ++ jwkLib ++ rocketMQLib ++ aiLib ++ Seq(
         "org.mindrot" % "jbcrypt" % "0.4",
-        "redis.clients" % "jedis" % "5.2.0",
-        "io.scalaland" %% "chimney" % "1.7.3", // case class convert easily
+        "redis.clients" % "jedis" % "6.0.0",
+        "io.scalaland" %% "chimney" % "1.8.2", // case class convert easily
         "org.hashids" % "hashids" % "1.0.3", // hashids
         "com.github.pathikrit" %% "better-files" % "3.9.2",
-        "org.scalameta" %% "munit" % "1.1.0" % Test,
+        "org.scalameta" %% "munit" % "1.1.1" % Test,
         // "org.xerial" % "sqlite-jdbc" % "3.47.2.0" % Test,
       )
   )

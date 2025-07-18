@@ -4,9 +4,9 @@ import io.circe.Json
 import org.pac4j.core.profile.UserProfile
 import org.pac4j.jwt.config.signature.RSASignatureConfiguration
 import org.pac4j.jwt.credentials.authenticator.JwtAuthenticator
-import sttp.client3.*
-import sttp.client3.logging.{ DefaultLog, LogLevel }
-import sttp.client3.logging.slf4j.Slf4jLoggingBackend
+import sttp.client4.*
+import sttp.client4.logging.{ DefaultLog, LogLevel }
+import sttp.client4.logging.slf4j.Slf4jLoggingBackend
 import sttp.model.StatusCode
 import very.util.task.retry.EasyRetry
 import very.util.web.JsonConfig
@@ -33,18 +33,22 @@ class TapirOIDCAdapter(
     "http://127.0.0.1:8180/realms/test/protocol/openid-connect/certs"
 ) {
 
-  private val httpClient =
+  private val httpClient = {
+    import sttp.client4.logging.LogConfig
     Slf4jLoggingBackend(
-      HttpClientSyncBackend(),
-      logResponseBody = true,
-      logRequestHeaders = false,
-      logResponseHeaders = false,
-      logRequestBody = true,
-      responseLogLevel = { status =>
-        if (status.code == 200) DefaultLog.defaultResponseLogLevel(status)
-        else LogLevel.Warn
-      },
+      DefaultSyncBackend(),
+      LogConfig(
+        logRequestBody = true,
+        logResponseBody = true,
+        logRequestHeaders = false,
+        logResponseHeaders = false,
+        responseLogLevel = { status =>
+          if (status.code == 200) LogLevel.Debug
+          else LogLevel.Warn
+        }
+      )
     )
+  }
 
   private def getJWKS
     : Either[io.circe.Error, List[RSASignatureConfiguration]] = {

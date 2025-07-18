@@ -12,29 +12,29 @@ object Dependencies {
 
   lazy val logLib = Seq(
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-    "ch.qos.logback" % "logback-classic" % "1.5.16",
+    "ch.qos.logback" % "logback-classic" % "1.5.18",
   )
 
   lazy val persistence = Seq(
-    "org.flywaydb" % "flyway-core" % "11.3.2",
-    "org.flywaydb" % "flyway-database-postgresql" % "11.3.2",
-    "com.lihaoyi" %% "scalasql" % "0.1.15",
-    "com.zaxxer" % "HikariCP" % "6.2.1",
-    "org.postgresql" % "postgresql" % "42.7.5" % "compile",
+    "org.flywaydb" % "flyway-core" % "11.10.3",
+    "org.flywaydb" % "flyway-database-postgresql" % "11.10.3",
+    "com.lihaoyi" %% "scalasql" % "0.1.20",
+    "com.zaxxer" % "HikariCP" % "6.3.0",
+    "org.postgresql" % "postgresql" % "42.7.7" % "compile",
     "mysql" % "mysql-connector-java" % "8.0.33" % "compile",
   )
 
   lazy val httpClient = {
-    val version = "3.10.3"
+    val version = "4.0.9"
     Seq(
-      "com.softwaremill.sttp.client3" %% "core" % version,
-      "com.softwaremill.sttp.client3" %% "circe" % version,
-      "com.softwaremill.sttp.client3" %% "slf4j-backend" % version,
+      "com.softwaremill.sttp.client4" %% "core" % version,
+      "com.softwaremill.sttp.client4" %% "circe" % version,
+      "com.softwaremill.sttp.client4" %% "slf4j-backend" % version,
     )
   }
 
   lazy val tapir = {
-    val version = "1.11.14"
+    val version = "1.11.37"
     val circeVersion = "0.14.9"
     Seq(
       "io.circe" %% "circe-core",
@@ -42,8 +42,8 @@ object Dependencies {
       "io.circe" %% "circe-parser",
     ).map(_ % circeVersion) ++
       Seq(
-        "io.circe" %% "circe-optics" % "0.15.0",
-        "com.softwaremill.sttp.tapir" %% "tapir-netty-server" % version,
+        "io.circe" %% "circe-optics" % "0.15.1",
+        "com.softwaremill.sttp.tapir" %% "tapir-netty-server-sync" % version,
         "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % version,
         // docs
         "com.softwaremill.sttp.tapir" %% "tapir-redoc-bundle" % version,
@@ -57,13 +57,13 @@ object Dependencies {
 
   lazy val configLib = {
     Seq(
-      // "com.typesafe" % "config" % "1.4.2",
-      "io.circe" %% "circe-config" % "0.10.1"
+      // "com.typesafe" % "config" % "1.4.3",
+      "io.circe" %% "circe-config" % "0.10.2"
     )
   }
 
   lazy val enumExtraLib = {
-    val version = "1.7.5"
+    val version = "1.9.0"
     Seq(
       "com.beachape" %% "enumeratum" % version,
       // "com.beachape" %% "enumeratum-quill" % version,
@@ -79,20 +79,20 @@ object Dependencies {
 
   lazy val jwkLib = {
     Seq(
-      "org.pac4j" % "pac4j-jwt" % "6.1.1",
+      "org.pac4j" % "pac4j-jwt" % "6.2.0",
       // "org.keycloak" % "keycloak-admin-client" % "26.0.4",
     )
   }
 
   lazy val rocketMQLib = {
     Seq(
-      "org.apache.rocketmq" % "rocketmq-client-java" % "5.0.7",
+      "org.apache.rocketmq" % "rocketmq-client-java" % "5.0.8",
     )
   }
 
   lazy val aiLib = {
     Seq(
-      "com.softwaremill.sttp.openai" %% "core" % "0.2.6",
+      "com.softwaremill.sttp.openai" %% "core" % "0.3.6",
     )
   }
   // lazy val templateLib = Seq("nl.big-o" % "liqp"% "0.9.0.3")

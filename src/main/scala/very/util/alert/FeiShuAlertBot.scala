@@ -1,10 +1,10 @@
 package very.util.alert
 
-import sttp.client3.logging.slf4j.Slf4jLoggingBackend
-import sttp.client3.*
+import sttp.client4.logging.slf4j.Slf4jLoggingBackend
+import sttp.client4.*
 import very.util.config.WithConfig
 import io.circe.*
-import sttp.client3.circe.*
+import sttp.client4.circe.*
 
 trait WithAlert extends WithConfig {
   import very.util.config.getOptional
@@ -16,17 +16,18 @@ trait WithAlert extends WithConfig {
 class FeiShuAlertBot(url: String, secret: Option[String] = None) extends Alert {
 
   private val client =
-    Slf4jLoggingBackend(HttpClientSyncBackend())
+    Slf4jLoggingBackend(DefaultSyncBackend())
 
   def send(text: String): Boolean = {
+    val jsonBody = Json.obj(
+      "msg_type" -> Json.fromString("text"),
+      "content" -> Json.obj("text" -> Json.fromString(text)),
+    )
+    
     basicRequest
       .post(uri"$url")
-      .body(
-        Json.obj(
-          "msg_type" -> Json.fromString("text"),
-          "content" -> Json.obj("text" -> Json.fromString(text)),
-        )
-      )
+      .contentType("application/json")
+      .body(jsonBody.noSpaces)
       .send(client)
       .is200
   }
