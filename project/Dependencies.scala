@@ -80,6 +80,7 @@ object Dependencies {
   lazy val jwkLib = {
     Seq(
       "org.pac4j" % "pac4j-jwt" % "6.2.0",
+      "org.pac4j" % "pac4j-oidc" % "6.2.0",
       // "org.keycloak" % "keycloak-admin-client" % "26.0.4",
     )
   }
